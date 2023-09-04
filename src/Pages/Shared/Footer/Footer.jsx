@@ -1,4 +1,4 @@
-import emo from '../../../assets/contact/emo.png'
+import emo from '../../../assets/menu/dessert-bg.jpeg'
 const Footer = () => {
     const yearDynamic = new Date().getFullYear();
 
