@@ -11,7 +11,7 @@ const Compo = ({ item }) => {
                     <h3 className="text-xl font-semibold">{name}</h3>
                     <p>{recipe}</p>
                     <p className="font-semibold">$ {price}</p>
-                    <button className="btn btn-outline">Default</button>
+                    <button className="btn btn-outline border-0 border-b-4 ">Default</button>
                 </div>
             </div>
         </section>
