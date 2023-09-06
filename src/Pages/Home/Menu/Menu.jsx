@@ -3,18 +3,17 @@ import Cover from "../../Shared/Cover/Cover";
 import menuImg from '../../../assets/menu/banner3.jpg';
 
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import PopularMenu from "../PopularMenu/PopularMenu";
 import Services from "../Services/Services";
 import useMenu from "../../../hooks/useMenu";
 import MenuCategory from "./MenuCategory/MenuCategory";
 
 const Menu = () => {
     const [menu] = useMenu();
-    const desserts = menu.filter(item => item.category === 'desserts')
     const salad = menu.filter(item => item.category === 'salad')
     const pizza = menu.filter(item => item.category === 'pizza')
     const soup = menu.filter(item => item.category === 'soup')
     const offered = menu.filter(item => item.category === 'offered')
+    const desserts = menu.filter(item => item.category === 'dessert')
     return (
         <div>
             <Helmet>
@@ -31,25 +30,31 @@ const Menu = () => {
                 heading={"Today's offer"}
                 subHeading={"Don't miss"}
             ></SectionTitle>
-            <MenuCategory items={offered}></MenuCategory>
+            <MenuCategory items={offered} title={'offered'}></MenuCategory>
             <Services></Services>
             <SectionTitle
                 heading={"Soup Item"}
                 subHeading={"Don't miss"}
             ></SectionTitle>
-            <MenuCategory items={soup}></MenuCategory>
+            <MenuCategory items={soup} title={'soup'}></MenuCategory>
             <Services></Services>
             <SectionTitle
                 heading={"Pizza Item"}
                 subHeading={"Don't miss"}
             ></SectionTitle>
-            <MenuCategory items={pizza}></MenuCategory>
+            <MenuCategory items={pizza} title={'pizza'}></MenuCategory>
             <Services></Services>
             <SectionTitle
                 heading={"Salad Item"}
                 subHeading={"Don't miss"}
             ></SectionTitle>
-            <MenuCategory items={salad}></MenuCategory>
+            <MenuCategory items={salad} title={'salad'}></MenuCategory>
+            <Services></Services>
+            <SectionTitle
+                heading={"Dessert Item"}
+                subHeading={"Don't miss"}
+            ></SectionTitle>
+            <MenuCategory items={desserts} title={'dessert'}></MenuCategory>
 
         </div>
     );

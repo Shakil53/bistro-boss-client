@@ -1,14 +1,10 @@
-import { Helmet } from "react-helmet";
 import { Parallax } from 'react-parallax';
 
 const Cover = ({ img, title }) => {
     return (
         <>
-            <Helmet>
-                <title>
-                    Bistro Boss | Cover
-                </title>
-            </Helmet>
+
+
             <Parallax
                 blur={{ min: -30, max: 30 }}
                 bgImage={img}
