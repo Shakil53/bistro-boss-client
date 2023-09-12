@@ -1,13 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import loginImg from '../../assets/others/authentication2.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { AuthContex } from '../../Provider/AuthProvider';
+import { Link } from 'react-router-dom';
 
 
 
 const Login = () => {
     const captchaRef = useRef();
     const [disabled, setDisabled] = useState(true)
+    const { signIn } = useContext(AuthContex)
 
+
+
+
+    //    Captcha validation
     useEffect(() => {
         loadCaptchaEnginge(5);
     }, [])
@@ -18,8 +25,16 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
+
+        // SignIn function call 
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+            })
     }
 
+    // captcha validation
     const handleValidateCaptcha = () => {
         const user_captcha_value = captchaRef.current.value;
         console.log(user_captcha_value)
@@ -41,7 +56,7 @@ const Login = () => {
                 </div>
                 <div className="card flex-shrink-0 w-1/2 max-w-sm shadow-2xl bg-base-100">
                     <form onSubmit={handleLogin} className="card-body">
-                        <h1 className="text-5xl font-bold">Please Login</h1>
+                        <h1 className="text-3xl font-bold">Please Login</h1>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -69,7 +84,11 @@ const Login = () => {
                             {/* <button className="btn btn-primary">Login</button> */}
                             <input className='btn btn-primary text-white' disabled={disabled} type='submit' value='Login'></input>
                         </div>
+                        <div>
+                            <p><small className='font-bold'>New here? Create an Account..<Link className=' text-xs badge badge-outline' to='/register'>Sign Up</Link></small></p>
+                        </div>
                     </form>
+
                 </div>
             </div>
         </div >
