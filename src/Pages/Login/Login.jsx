@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import loginImg from '../../assets/others/authentication2.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 
 
 
 const Login = () => {
+    const captchaRef = useRef();
+    const [disabled, setDisabled] = useState(true)
 
     useEffect(() => {
         loadCaptchaEnginge(5);
@@ -16,6 +18,18 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
+    }
+
+    const handleValidateCaptcha = () => {
+        const user_captcha_value = captchaRef.current.value;
+        console.log(user_captcha_value)
+        if (validateCaptcha(user_captcha_value)) {
+            setDisabled(false)
+        }
+        else {
+            setDisabled(true)
+        }
+
     }
 
     return (
@@ -46,14 +60,14 @@ const Login = () => {
                         <div className="form-control">
 
                             <LoadCanvasTemplate />
-                            <input type="password" name='password' placeholder="type the text above" className="input input-bordered" />
+                            <input ref={captchaRef} type="password" name='password' placeholder="type the text above" className="input input-bordered" />
                         </div>
                         <div>
-                            <button className="btn btn-outline btn-xs">Validate</button>
+                            <button onClick={handleValidateCaptcha} className="btn btn-outline btn-xs">Validate</button>
                         </div>
                         <div className="form-control mt-6">
                             {/* <button className="btn btn-primary">Login</button> */}
-                            <input className='btn btn-primary text-white' type='submit' value='Login'></input>
+                            <input className='btn btn-primary text-white' disabled={disabled} type='submit' value='Login'></input>
                         </div>
                     </form>
                 </div>
