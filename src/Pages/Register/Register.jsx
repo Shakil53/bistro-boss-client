@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import loginImg from '../../assets/others/authentication2.png'
+import { useForm } from 'react-hook-form';
 
 
 
@@ -7,12 +8,22 @@ import loginImg from '../../assets/others/authentication2.png'
 
 const Register = () => {
 
+    // 
+    const { register, handleSubmit, formState: { errors } } = useForm()
 
-
-
-    const handleSignUp = () => {
-
+    const onSubmit = (data) => {
+        console.log(data)
     }
+
+
+    // console.log(watch("example"))
+
+
+
+
+    // const handleSignUp = () => {
+
+    // }
 
 
     return (
@@ -23,25 +34,26 @@ const Register = () => {
                     <img src={loginImg}></img>
                 </div>
                 <div className="card flex-shrink-0 w-1/2 max-w-sm shadow-2xl bg-base-100">
-                    <form onSubmit={handleSignUp} className="card-body">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                         <h1 className="text-3xl font-bold">Please Register</h1>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="name" name='name' placeholder="name" className="input input-bordered" />
+                            <input type="name" {...register("name", { required: true })} name='name' placeholder="name" className="input input-bordered" />
+                            {errors.name && <span><small className='text-red-500'>name field is required</small></span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" name='email' placeholder="email" className="input input-bordered" />
+                            <input type="email" {...register("email")} name='email' required placeholder="email" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" name='password' placeholder="password" className="input input-bordered" />
+                            <input type="password" {...register("password")} required name='password' placeholder="password" className="input input-bordered" />
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
