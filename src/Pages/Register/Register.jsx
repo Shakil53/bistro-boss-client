@@ -41,6 +41,8 @@ const Register = () => {
                                 <span className="label-text">Name</span>
                             </label>
                             <input type="name" {...register("name", { required: true })} name='name' placeholder="name" className="input input-bordered" />
+
+                            {/* name field is required error message */}
                             {errors.name && <span><small className='text-red-500'>name field is required</small></span>}
                         </div>
                         <div className="form-control">
@@ -48,12 +50,24 @@ const Register = () => {
                                 <span className="label-text">Email</span>
                             </label>
                             <input type="email" {...register("email")} name='email' required placeholder="email" className="input input-bordered" />
+
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" {...register("password")} required name='password' placeholder="password" className="input input-bordered" />
+                            <input type="password" {...register("password", {
+                                required: true,
+                                minLength: 6,
+                                maxLength: 20,
+                                pattern: /(?=(.*[a-z]))(?=(.*[A-Z]))(?=(.*[0-9]))(?=(.*[!@#$%^&*()\-__+.]))/
+
+                            })} required name='password' placeholder="password" className="input input-bordered" />
+
+                            {/* password length error message */}
+                            {errors.password?.type === 'minLength' && <span><small className='text-red-500'>password must be 6 characters</small></span>}
+                            {errors.password?.type === 'maxLength' && <span><small className='text-red-500'>password must be less then 20 characters</small></span>}
+                            {errors.password?.type === 'pattern' && <span><small className='text-red-500'>password must have one uppercase, one lower case and one special character</small></span>}
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
