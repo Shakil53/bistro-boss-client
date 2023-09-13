@@ -48,6 +48,13 @@ const Login = () => {
                 });
                 navigate(from, { replace: true });
             })
+            .catch(() => {
+                Swal.fire(
+                    'Wrrong Password!',
+                    'Type Correct Password',
+                    'warning'
+                )
+            })
     }
 
     // captcha validation
