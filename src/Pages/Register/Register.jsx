@@ -1,20 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/others/authentication2.png'
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet';
 import { useContext } from 'react';
 import { AuthContex } from '../../Provider/AuthProvider';
-
-
+import Swal from 'sweetalert2';
 
 
 
 const Register = () => {
 
-    const { createUser } = useContext(AuthContex)
+    const { createUser, updateUserProfile } = useContext(AuthContex)
+    const navigate = useNavigate();
 
     // RHF
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, reset, formState: { errors } } = useForm()
 
     const onSubmit = (data) => {
         console.log(data)
@@ -22,15 +22,27 @@ const Register = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        console.log('user profile info updated')
+                        reset();
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'User Create Successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        navigate('/')
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
 
             })
     }
 
-
     // console.log(watch("example"))
-
-
-
 
     // const handleSignUp = () => {
 
@@ -59,6 +71,15 @@ const Register = () => {
 
                                 {/* name field is required error message */}
                                 {errors.name && <span><small className='text-red-500'>name field is required</small></span>}
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Photo Url</span>
+                                </label>
+                                <input type="name" {...register("photoURL", { required: true })} placeholder="photo url" className="input input-bordered" />
+
+                                {/* name field is required error message */}
+                                {errors.photoURL && <span><small className='text-red-500'>Photo Url is Required</small></span>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
