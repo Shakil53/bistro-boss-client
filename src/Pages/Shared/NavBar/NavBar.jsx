@@ -19,6 +19,7 @@ const NavBar = () => {
         <Link to="/menu"><button className="btn btn-sm btn-outline text-white ml-3">Our Menu</button></Link>
         <Link to="/"><button className="btn btn-sm btn-outline text-white ml-3">Home</button></Link>
         <Link to="/order"><button className="btn btn-sm btn-outline text-white ml-3">Order</button></Link>
+        <Link to="/secret"><button className="btn btn-sm btn-outline text-white ml-3">Private Route</button></Link>
 
         {
             user ? <><button onClick={handleLogOut} className="btn btn-sm btn-outline text-white ml-3">Logout</button></> :

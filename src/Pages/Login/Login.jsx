@@ -1,16 +1,20 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import loginImg from '../../assets/others/authentication2.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContex } from '../../Provider/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2';
 
 
 
 const Login = () => {
-    const [disabled, setDisabled] = useState(true)
+    // const [disabled, setDisabled] = useState(true)
     const { signIn } = useContext(AuthContex);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
 
 
 
@@ -41,7 +45,8 @@ const Login = () => {
                     hideClass: {
                         popup: 'animate__animated animate__fadeOutUp'
                     }
-                })
+                });
+                navigate(from, { replace: true });
             })
     }
 
@@ -50,10 +55,10 @@ const Login = () => {
         const user_captcha_value = e.target.value;
         // console.log(user_captcha_value)
         if (validateCaptcha(user_captcha_value)) {
-            setDisabled(false);
+            // setDisabled(false);
         }
         else {
-            setDisabled(true)
+            // setDisabled(true)
         }
 
     }
@@ -95,7 +100,7 @@ const Login = () => {
 
                             <div className="form-control mt-6">
                                 {/* <button className="btn btn-primary">Login</button> */}
-                                <input className='btn btn-primary text-white' disabled={disabled} type='submit' value='Login'></input>
+                                <input className='btn btn-primary text-white' type='submit' value='Login'></input>
                             </div>
                             <div>
                                 <p><small className='font-bold'>New here? Create an Account..<Link className=' text-xs badge badge-outline' to='/register'>Sign Up</Link></small></p>
