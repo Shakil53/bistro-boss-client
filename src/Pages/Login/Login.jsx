@@ -68,9 +68,8 @@ const Login = () => {
             <Helmet>
                 <title>Bistro Boss | Login</title>
             </Helmet>
-            <div className="hero min-h-screen bg-base-200 h-screen 
-        bg-loginBg bg-no-repeat">
-                <div className="hero-content flex-col lg:flex-row mr-9">
+            <div className="hero min-h-screen bg-base-200 h-screen bg-loginBg bg-no-repeat">
+                <div className="hero-content flex-col lg:flex-row-reverse mr-9">
                     <div className="text-center w-1/2 lg:text-left">
                         <img src={loginImg}></img>
                     </div>

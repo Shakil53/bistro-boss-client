@@ -23,23 +23,22 @@ const Register = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
                 updateUserProfile(data.name, data.photoURL)
-                    .then(() => {
-                        console.log('user profile info updated')
-                        reset();
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'User Create Successfully',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        navigate('/')
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
 
+                reset();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'User Create Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                navigate('/login')
             })
+            .catch(error => {
+                console.log(error)
+            })
+
+
     }
 
     // console.log(watch("example"))
@@ -54,8 +53,7 @@ const Register = () => {
             <Helmet>
                 <title>Bistro Boss | Register</title>
             </Helmet>
-            <div className="hero min-h-screen bg-base-200 h-screen 
-        bg-loginBg bg-no-repeat">
+            <div className="hero min-h-screen bg-base-200 h-screen bg-loginBg bg-no-repeat">
                 <div className="hero-content flex-col lg:flex-row mr-9">
                     <div className="text-center w-1/2 lg:text-left">
                         <img src={loginImg}></img>
