@@ -29,11 +29,11 @@ const FoodCard = ({ item }) => {
                     if (data.insertedId) {
                         refatch();
                         Swal.fire({
-                            position: 'top-end',
+                            position: 'center',
                             icon: 'success',
                             title: 'Food Added on the Cart',
                             showConfirmButton: false,
-                            timer: 800
+                            timer: 600
                         })
                     }
                 })
