@@ -5,3 +5,12 @@
 .my-custom-bg-class {
     background-image: url(../src//assets/others/authentication.png);
 }
+
+.drawer-side a.active {
+    color: white;
+
+}
+
+.drawer-side a {
+    background-color: transparent;
+}
