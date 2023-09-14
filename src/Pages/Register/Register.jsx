@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import { useContext } from 'react';
 import { AuthContex } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 
 
@@ -141,6 +142,9 @@ const Register = () => {
                             </div>
                             <div>
                                 <p><small className='font-bold'>Already have an Account?..<Link className=' text-xs badge badge-outline' to='/login'>Sign In</Link></small></p>
+                            </div>
+                            <div className='w-full text-center'>
+                                <SocialLogin></SocialLogin>
                             </div>
                         </form>
 
