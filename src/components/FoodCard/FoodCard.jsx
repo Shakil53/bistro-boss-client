@@ -8,7 +8,7 @@ const FoodCard = ({ item }) => {
     const { user } = useContext(AuthContex)
     const navigate = useNavigate();
     const location = useLocation();
-    const [, refatch] = useCart();
+    const [, refetch] = useCart();
     const { name, image, price, recipe, _id } = item;
 
 
@@ -26,8 +26,9 @@ const FoodCard = ({ item }) => {
             })
                 .then(res => res.json())
                 .then(data => {
+                    console.log(data)
                     if (data.insertedId) {
-                        refatch();
+                        refetch();   // refetch cart to update the number of item in the cart 
                         Swal.fire({
                             position: 'center',
                             icon: 'success',

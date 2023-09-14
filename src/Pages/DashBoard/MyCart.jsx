@@ -5,41 +5,40 @@ import { FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
 const MyCart = () => {
-    const [cart, refatch] = useCart()
+    const [cart, refetch] = useCart()
     // console.log(cart)
     const total = cart.reduce((sum, item) => item.price + sum, 0)
 
-    // delete item
-    // const deleteHandle = (item) => {
-    //     console.log(item)
-    //     Swal.fire({
-    //         title: 'Are you sure?',
-    //         text: "You want to Delete this item?",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Yes, delete it!'
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             fetch(`http://localhost:5000/carts/${item._id}`, {
-    //                 method: "DELETE",
-
-    //             })
-    //                 .then(res => res.json())
-    //                 .then(data => {
-    //                     if (data.deletedCount > 0) {
-    //                         refatch()
-    //                         Swal.fire(
-    //                             'Deleted!',
-    //                             'Your file has been deleted.',
-    //                             'success'
-    //                         )
-    //                     }
-    //                 })
-    //         }
-    //     })
-    // }
+    // delete item TODO DELETE
+    const deleteHandle = item => {
+        console.log(item)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to Delete this item?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/carts/${item._id}`, {
+                    method: "DELETE"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            refetch()
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+            }
+        })
+    }
 
     return (
         <div className='w-full ml-20 mt-8'>
@@ -96,7 +95,7 @@ const MyCart = () => {
                                 </td>
                                 <td className='text-end'>${item.price}</td>
                                 <th>
-                                    <button className="btn btn-ghost  bg-red-600 text-white"><FaTrashAlt></FaTrashAlt></button>
+                                    <button onClick={() => deleteHandle(item._id)} className="btn btn-ghost  bg-red-600 text-white"><FaTrashAlt></FaTrashAlt></button>
                                 </th>
                             </tr>)
                         }
