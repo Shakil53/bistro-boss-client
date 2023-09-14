@@ -5,6 +5,7 @@ import { AuthContex } from '../../Provider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 
 
@@ -48,13 +49,7 @@ const Login = () => {
                 });
                 navigate(from, { replace: true });
             })
-            .catch(() => {
-                Swal.fire(
-                    'Wrrong Password!',
-                    'Type Correct Password',
-                    'warning'
-                )
-            })
+
     }
 
     // captcha validation
@@ -110,6 +105,9 @@ const Login = () => {
                             </div>
                             <div>
                                 <p><small className='font-bold'>New here? Create an Account..<Link className=' text-xs badge badge-outline' to='/register'>Sign Up</Link></small></p>
+                            </div>
+                            <div className='w-full text-center'>
+                                <SocialLogin></SocialLogin>
                             </div>
                         </form>
 
