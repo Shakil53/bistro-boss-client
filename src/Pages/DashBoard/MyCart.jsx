@@ -10,8 +10,8 @@ const MyCart = () => {
     const total = cart.reduce((sum, item) => item.price + sum, 0)
 
     // delete item TODO DELETE
-    const deleteHandle = item => {
-        console.log(item)
+    const handleDelete = item => {
+
         Swal.fire({
             title: 'Are you sure?',
             text: "You want to Delete this item?",
@@ -95,7 +95,7 @@ const MyCart = () => {
                                 </td>
                                 <td className='text-end'>${item.price}</td>
                                 <th>
-                                    <button onClick={() => deleteHandle(item._id)} className="btn btn-ghost  bg-red-600 text-white"><FaTrashAlt></FaTrashAlt></button>
+                                    <button onClick={() => handleDelete(item)} className="btn btn-ghost  bg-red-600 text-white"><FaTrashAlt></FaTrashAlt></button>
                                 </th>
                             </tr>)
                         }
