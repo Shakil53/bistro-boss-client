@@ -11,6 +11,7 @@ const AllUsers = () => {
     })
 
     // delete user from alluser dashboad-----
+    // TODO: user from alluser delete 
     const handleDelete = (user) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -28,6 +29,7 @@ const AllUsers = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.deletedCount > 0) {
+                            refetch()
                             Swal.fire(
                                 'Deleted!',
                                 'Your file has been deleted.',
@@ -37,13 +39,6 @@ const AllUsers = () => {
                     })
             }
         })
-
-
-
-
-
-
-
     }
 
     // make an user admin-----------------
