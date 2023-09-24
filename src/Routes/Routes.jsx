@@ -12,6 +12,7 @@ import Secret from "../Pages/Shared/Secret/Secret";
 import DashBoard from "../LoyOut/DashBoard/DashBoard";
 import MyCart from "../Pages/DashBoard/MyCart";
 import AllUsers from "../LoyOut/DashBoard/AllUsers/AllUsers";
+import AddItem from "../LoyOut/DashBoard/AddItem/AddItem";
 
 
 
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
             {
                 path: 'allusers',
                 element: <AllUsers></AllUsers>
+            },
+            {
+                path: 'addItem',
+                element: <AddItem></AddItem>
             }
         ]
     }
