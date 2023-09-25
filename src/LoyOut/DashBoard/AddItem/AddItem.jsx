@@ -1,10 +1,45 @@
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from 'react-hook-form';
 
+const img_hosting_token = import.meta.env.VITE_image_Upload_File;
+
 const AddItem = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-    console.log(errors);
+    const { register, handleSubmit } = useForm();
+
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
+
+    const onSubmit = data => {
+
+        const formData = new FormData();
+        formData.append('image', data.image[0])
+
+        fetch(img_hosting_url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgResponse => {
+                if (imgResponse.success) {
+                    const imgURL = imgResponse.data.display_url;
+                    const { name, price, category, recipe } = data;
+                    const newItem = { name, price: parseFloat(price), category, recipe, image: imgURL }
+                    console.log(newItem)
+
+                    fetch(`http://localhost:5000/menu`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(newItem),
+                    })
+
+                }
+
+            })
+    };
+
+
+    // console.log(img_hosting_token)
     return (
         <div className='w-full ml-14'>
             <SectionTitle subHeading="add item into menu"
@@ -24,12 +59,13 @@ const AddItem = () => {
                         <label className="label">
                             <span className="label-text">Category*</span>
                         </label>
-                        <select className="select select-bordered" {...register("category", { required: true })}>
-                            <option selected>Pick one</option>
+                        <select defaultValue='Pick One' className="select select-bordered" {...register("category", { required: true })}>
+                            <option disabled>Pick one</option>
                             <option>Pizza</option>
                             <option>Drink</option>
                             <option>Salad</option>
                             <option>Deserts</option>
+                            <option>Desi</option>
                         </select>
 
                     </div>
@@ -48,7 +84,7 @@ const AddItem = () => {
                     <label className="label">
                         <span className="label-text">Recipe Details</span>
                     </label>
-                    <textarea className="textarea textarea-bordered h-24"  {...register("details", { required: true, minLength: 2, maxLength: 200 })} placeholder="Bio"></textarea>
+                    <textarea className="textarea textarea-bordered h-24"  {...register("recipe", { required: true, minLength: 2, maxLength: 200 })} placeholder="Bio"></textarea>
 
                 </div>
                 {/* file input--------------- */}
@@ -57,7 +93,7 @@ const AddItem = () => {
                         <span className="label-text">Item Image</span>
 
                     </label>
-                    <input type="file" {...register("file", { required: true })} className="file-input file-input-bordered w-full max-w-xs" />
+                    <input type="file" {...register("image", { required: true })} className="file-input file-input-bordered w-full max-w-xs" />
 
                 </div>
                 {/* btn */}
