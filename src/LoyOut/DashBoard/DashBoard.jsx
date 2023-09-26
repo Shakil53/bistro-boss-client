@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import { FaShoppingCart, FaHome, FaCalendar, FaReceipt, FaWallet, FaBars, FaShopify, FaMailBulk, FaComments, FaUtensils, FaUser, FaList, } from "react-icons/fa";
+import { FaShoppingCart, FaHome, FaCalendar, FaReceipt, FaWallet, FaBars, FaShopify, FaMailBulk, FaComments, FaUtensilSpoon, FaUser, FaList, } from "react-icons/fa";
 import useCart from "../../hooks/useCart";
 
 const DashBoard = () => {
@@ -21,8 +21,9 @@ const DashBoard = () => {
                     {/* {
                         isAdmin ? <> */}
                     <li><Link className="fond-bold text-white" t0='/dashboard/home'><FaHome></FaHome>Admin Home</Link></li>
-                    <li><Link className="fond-bold text-white" t0='/dashboard/addItem'><FaUtensils></FaUtensils>Add Item</Link></li>
-                    <li><Link className="fond-bold text-white" to='/dashboard/mycart'><FaList></FaList>Manage Item</Link></li>
+
+                    <li><Link className="fond-bold text-white" to='/dashboard/addItem'><FaUtensilSpoon></FaUtensilSpoon>Add Item</Link></li>
+                    <li><Link className="fond-bold text-white" to='/dashboard/manageItems'><FaList></FaList>Manage Item</Link></li>
                     <li><Link className="fond-bold text-white" to='/dashboard/allusers'><FaUser></FaUser>All Users</Link></li>
                     {/* </> */}
 

@@ -13,6 +13,7 @@ import DashBoard from "../LoyOut/DashBoard/DashBoard";
 import MyCart from "../Pages/DashBoard/MyCart";
 import AllUsers from "../LoyOut/DashBoard/AllUsers/AllUsers";
 import AddItem from "../LoyOut/DashBoard/AddItem/AddItem";
+import ManageItems from "../LoyOut/DashBoard/ManageItems/ManageItems";
 
 
 
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
             {
                 path: 'addItem',
                 element: <AddItem></AddItem>
+            },
+            {
+                path: 'manageItems',
+                element: <ManageItems></ManageItems>
             }
         ]
     }

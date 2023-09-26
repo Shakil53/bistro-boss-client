@@ -1,10 +1,11 @@
+import Swal from "sweetalert2";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from 'react-hook-form';
 
 const img_hosting_token = import.meta.env.VITE_image_Upload_File;
 
 const AddItem = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
 
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
@@ -32,10 +33,25 @@ const AddItem = () => {
                         },
                         body: JSON.stringify(newItem),
                     })
+                        .then(data => {
+                            console.log('after posting new menu item', data)
+                            if (data.ok) {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Your work has been saved',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+
+                        })
 
                 }
 
             })
+        reset()
+
     };
 
 
