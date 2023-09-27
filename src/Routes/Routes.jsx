@@ -14,6 +14,7 @@ import MyCart from "../Pages/DashBoard/MyCart";
 import AllUsers from "../LoyOut/DashBoard/AllUsers/AllUsers";
 import AddItem from "../LoyOut/DashBoard/AddItem/AddItem";
 import ManageItems from "../LoyOut/DashBoard/ManageItems/ManageItems";
+import Payment from "../Pages/DashBoard/Payment/Payment";
 
 
 
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
             {
                 path: 'manageItems',
                 element: <ManageItems></ManageItems>
+            },
+            {
+                path: 'payment',
+                element: <Payment></Payment>
             }
         ]
     }
